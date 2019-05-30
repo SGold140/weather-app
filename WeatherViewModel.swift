@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import RealmSwift
 
 class WeatherViewModel {
     
@@ -48,6 +49,24 @@ class WeatherViewModel {
             {
                 let loc = Location.init(name: name, temperature: String(kelvinToFahrenheit(kelvin: temp)), tempMax: String(kelvinToFahrenheit(kelvin: tempMax)), tempMin: String(kelvinToFahrenheit(kelvin: tempMin)), description: description, icon: icon, windDegree: String(windDeg), windSpeed: String(windSpeed), clouds: String(all))
                     locations.append(loc)
+                
+//                let realm = try! Realm()
+//                
+//                try! realm.write {
+//                    
+//                    let location = RealmLocation()
+//                    location.name = name
+//                    location.temperature = String(temp)
+//                    location.tempMax = String(tempMax)
+//                    location.tempMin = String(tempMin)
+//                    location.desc = description
+//                    location.icon = icon
+//                    location.windSpeed = String(windSpeed)
+//                    location.windDegree = String(windDeg)
+//                    location.clouds = String(all)
+//                    
+//                    realm.add(location)
+//                }
             }
         }
     }

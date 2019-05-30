@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-import Alamofire
+import RealmSwift
 
 class WeatherViewController: UITableViewController {
     
@@ -16,6 +16,7 @@ class WeatherViewController: UITableViewController {
     
     let viewModel = WeatherViewModel()
     var locations: [Location] = []
+    var realmLocations: Results<RealmLocation>?
     var idx: Int?
     let weatherToDetails = "weather_to_details"
     
@@ -25,6 +26,8 @@ class WeatherViewController: UITableViewController {
         weatherTable.delegate = self
         viewModel.getLocations() { [weak self] (response) in
             self?.locations = response
+//            let realm = try! Realm()
+//            self?.realmLocations = realm.objects(RealmLocation.self).filter("name = %@ or name = %@ or name = %@", "Queens", "London", "Tokyo")
             DispatchQueue.main.async {
                 self?.weatherTable.reloadData()
             }
@@ -54,18 +57,8 @@ extension WeatherViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        let dvc = DetailsViewController()
         dvc.location = locations[indexPath.row]
-//        performSegue(withIdentifier: weatherToDetails, sender: indexPath)
+//        let realm = try! Realm()
+//        let location = realm.objects(RealmLocation.self).filter("name = %@", locations[indexPath.row])
         navigationController?.pushViewController(dvc, animated: true)
     }
 }
-
-//extension WeatherViewController {
-//    func prepare(for segue: UIStoryboardSegue, sender: IndexPath) {
-//        if segue.identifier == weatherToDetails {
-//            if let vc = segue.destination as? DetailsViewController {
-//                vc.location = locations[sender.row]
-//            }
-//        }
-//    }
-//}
-
