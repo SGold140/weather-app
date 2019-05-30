@@ -51,8 +51,8 @@ class DetailsViewController: UIViewController {
     fileprivate func makeWindLabel(_ windLabel: UILabel) {
         windLabel.snp.makeConstraints { (make) in
             make.width.equalTo(card.snp.width)
-            make.height.equalTo(100.0)
-            make.top.equalTo(card.snp.top).offset(-25.0)
+            make.height.equalTo(card.snp.height).dividedBy(2.0)
+            make.top.equalTo(card.snp.top).offset(25.0)
             make.centerX.equalTo(card.snp.centerX)
         }
         setText(windLabel, text: "Wind Speed: \(location.windSpeed) - Degrees: \(location.windDegree)")
@@ -63,7 +63,7 @@ class DetailsViewController: UIViewController {
     fileprivate func makeCloudsLabel(_ cloudsLabel: UILabel, _ windLabel: UILabel) {
         cloudsLabel.snp.makeConstraints { (make) in
             make.width.equalTo(card.snp.width)
-            make.height.equalTo(100.0)
+            make.height.equalTo(card.snp.height).dividedBy(2.0)
             make.top.equalTo(windLabel.snp.bottom).offset(25.0)
             make.centerX.equalTo(card.snp.centerX)
         }
